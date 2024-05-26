@@ -1,36 +1,66 @@
-import React, { useState } from 'react';
+import React from "react";
+import CustomDropdown from "./CustomDropdown";
 
 interface TablePaginationProps {
   data: any[];
   onChangeRowsPerPage: (rowsPerPage: number) => void;
 }
 
-const TablePagination: React.FC<TablePaginationProps> = ({ data, onChangeRowsPerPage }) => {
-  const [rowsPerPage, setRowsPerPage] = useState<number>(2);
+interface optionProps {
+  id: number;
+  value: number;
+  label: string;
+}
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedRowsPerPage = Number(event.target.value);
-    setRowsPerPage(selectedRowsPerPage);
+const TablePagination: React.FC<TablePaginationProps> = ({
+  data,
+  onChangeRowsPerPage,
+}) => {
+  const options: optionProps[] = [
+    {
+      id: 0,
+      value: 2,
+      label: "2",
+    },
+    {
+      id: 1,
+      value: 10,
+      label: "10",
+    },
+    {
+      id: 2,
+      value: 15,
+      label: "15",
+    },
+    {
+      id: 3,
+      value: 25,
+      label: "25",
+    },
+    {
+      id: 4,
+      value: 50,
+      label: "50",
+    },
+    {
+      id: 5,
+      value: 100,
+      label: "100",
+    },
+  ];
+
+  const handleChangeRowsPerPage = (selectedRowsPerPage: number) => {
     onChangeRowsPerPage(selectedRowsPerPage);
   };
 
   return (
-    <div className="bg-[#f4f7fc] mt-4 flex items-center justify-end px-4 py-2">
-      <div className="flex items-center justify-end">
+    <div className="bg-lightBlue mt-4 flex items-center justify-end px-4 py-2">
+      <div className="relative flex items-center justify-end">
         <span className="mr-2">Rows per page:</span>
-        <select
-          className="px-3 py-1 rounded-md focus:outline-none focus:bg-gray-400"
-          value={rowsPerPage}
-          onChange={handleChangeRowsPerPage}
-          style={{ backgroundColor: '#ffffff' }}
-        >
-          <option value="2">2</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
+        <CustomDropdown
+          options={options}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </div>
     </div>
   );

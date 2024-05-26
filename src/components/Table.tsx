@@ -50,7 +50,7 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
   };
   
   return (
-    <div className="overflow-x-auto">
+    <div className="">
       <table className="min-w-full bg-white">
         <thead>
           <tr>
@@ -70,7 +70,7 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
         </thead>
         <tbody>
           {data.slice(0, rowsPerPage).map((row, rowIndex) => (
-            <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-[#f4f7fc]'}>
+            <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-lightBlue'}>
               {columns.map((column) => (
                 <td
                   key={column.accessor}
